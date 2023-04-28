@@ -1,71 +1,88 @@
-function configureListeners() {
-    let images = // select img elements  
+function setupListeners() {
+    const imgElements = document.querySelectorAll('img');
 
-
-     for (var i = 0; i < images.length; i++) {        
-        // iterate over images and add mouseover event listeners      
-    } 
+    imgElements.forEach((img) => {
+        img.addEventListener('mouseenter', highlightImage, false);
+        img.addEventListener('mouseleave', unhighlightImage, false);
+    });
 }
 
-function addOpacity(event) {
-    // add appropriate CSS class
-    getProductInfo(event.target.id);     
+function highlightImage(event) {
+    if (!this.classList.contains('dim')) {
+        this.classList.add('dim');
+    }
+    displayProductInfo(event.target.id);
 }
 
-function removeOpacity(event) {
-     //remove appropriate CSS class
+function unhighlightImage(event) {
+    if (this.classList.contains('dim')) {
+        this.classList.remove('dim');
+    }
 
-    let element = document.getElementById('color-price');
-        element.textContent = '';
-        
-    let color = document.getElementById('color-name');
-        color.textContent = ''; 
+    const priceElement = document.getElementById('color-price');
+    priceElement.textContent = '';
 
-    event.preventDefault();    
+    const colorElement = document.getElementById('color-name');
+    colorElement.textContent = '';
+
+    event.preventDefault();
 }
 
-function getProductInfo(paintColor) {
-    let price;
-    let colorName;  
-    
-    switch (paintColor) {
-        case 'pn1':           
-            // set variables for price and color name and invoke a function to update the price     
-            break;           
+function displayProductInfo(productID) {
+    let productPrice;
+    let productColor;
+
+    switch (productID) {
+        case 'pn1':
+            productPrice = '$19.99';
+            productColor = 'Lime Green';
+            break;
         case 'pn2':
-            // set variables for price and color name and invoke a function to update the price    
-            break;            
+            productPrice = '$12.99';
+            productColor = 'Medium Brown';
+            break;
         case 'pn3':
-            // set variables for price and color name and invoke a function to update the price  
-            break;   
+            productPrice = '$11.99';
+            productColor = 'Royal Blue';
+            break;
         case 'pn4':
-            // set variables for price and color name and invoke a function to update the price  
-            break;   
+            productPrice = '$14.99';
+            productColor = 'Bright Red';
+            break;
         case 'pn5':
-            // set variables for price and color name and invoke a function to update the price       
-            break;   
+            productPrice = '$9.99';
+            productColor = 'Solid White';
+            break;
         case 'pn6':
-            // set variables for price and color name and invoke a function to update the price        
-            break;   
+            productPrice = '$15.99';
+            productColor = 'Solid Black';
+            break;
         case 'pn7':
-            // set variables for price and color name and invoke a function to update the price 
-            break;   
+            productPrice = '$8.99';
+            productColor = 'Medium Blue';
+            break;
         case 'pn8':
-            // set variables for price and color name and invoke a function to update the price   
-            break;   
+            productPrice = '$16.99';
+            productColor = 'Light Purple';
+            break;
         case 'pn9':
-            // set variables for price and color name and invoke a function to update the price 
-            break;   
-          default:              
+            productPrice = '$17.99';
+            productColor = 'Bright Yellow';
+            break;
+        default:
+            productPrice = '';
+            productColor = '';
     }
 
-    function updatePrice(colorName, price)
-    {       
-        let colorPrice = // select element with corresponding id
-        // display price
-        
-        let color = // select element with corresponding id
-        //display color name
-    }
-    
+    updateDisplayedPrice(productColor, productPrice);
 }
+
+function updateDisplayedPrice(productColor, productPrice) {
+    const priceElement = document.getElementById('color-price');
+    priceElement.textContent = productPrice;
+
+    const colorElement = document.getElementById('color-name');
+    colorElement.textContent = productColor;
+}
+
+setupListeners();
